@@ -2,6 +2,7 @@ import './App.css';
 import { useState, useEffect } from 'react';
 import {AiOutlineDelete} from 'react-icons/ai';
 import {BsCheckLg} from 'react-icons/bs';
+import {AiOutlineEdit} from 'react-icons/ai';
 
 function App() {
 
@@ -11,6 +12,9 @@ function App() {
   const [newDescription, setNewDescription] = useState("");
 
   const [completedTodos, setCompletedTodows] = useState([]);
+
+  const [currentEdit, setCurrentEdit] = useState("");
+  const [currentEditItem, setCurrentEditItem] = useState("");
 
   const handleAddTodo = () => {
     let newTodo = {
@@ -71,6 +75,28 @@ function App() {
     }
   },[]);
 
+  const handleEditTodo = (index) => {
+    setCurrentEdit(index);
+    setCurrentEditItem(allTodows[index]);
+  }
+
+  const handleUpdateTitle = (value) => {
+    let updatedTodos = [...allTodows];
+    updatedTodos[currentEdit].title = value;
+    setTodos(updatedTodos);
+  }
+
+  const handleUpdateDescription = (value) => {
+    let updatedTodos = [...allTodows];
+    updatedTodos[currentEdit].description = value;
+    setTodos(updatedTodos);
+  }
+
+  const handleSaveEdit = (index) => {
+    setCurrentEdit("");
+    localStorage.setItem("todoslist", JSON.stringify(allTodows));
+  }
+
   return (
     <div className="App">
      <h1> Minha Lista de Tarefas </h1>
@@ -98,6 +124,17 @@ function App() {
       </div>
 
       {isCompleteScreen === false &&allTodows.map((item, index) => {
+        if(currentEdit === index){
+          return(
+            <div className ="edit-wrapper" key={index}>
+           <input placeholder = "Update Title" onChange ={(e) => 
+            handleUpdateTitle(e.target.value)} value={currentEditItem.title}></input>
+            <textarea placeholder = "Update Description" rows={4} onChange ={(e) => 
+            handleUpdateDescription(e.target.value)} value={currentEditItem.description}></textarea>
+            <button className="primary-button" onClick={() => handleSaveEdit(index)}> Save </button>
+          </div>
+          )
+        }
         return(
           <div className="todo-item" key={index}>
             <div>
@@ -108,6 +145,7 @@ function App() {
             <div className="icons">
               <AiOutlineDelete className="delete-icon" onClick={() => handleDeleteTodo(index)} />
               <BsCheckLg className="check-icon" onClick={() => handleCompleteTodo(index)} />
+                <AiOutlineEdit className="check-icon" onClick={() => handleEditTodo(index)} />
             </div>
           </div>
         )
