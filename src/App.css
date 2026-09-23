@@ -70,9 +70,7 @@ h1{
 }
 
 .button-area{
-  display: flex;
-  justify-content: center;
-  
+  margin-bottom: 15px;
 }
 
 .secundary-button{
@@ -89,4 +87,65 @@ h1{
 
 .active{
   background-color: rgb(66, 243, 104);
+}
+
+.todo-list{
+  display: flex;
+  flex-direction: column;
+
+}
+
+.todo-list-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #414040;
+}
+
+.todo-item h3{
+  margin: 0;
+  font-size: 25px;
+  color: rgb(43, 247, 87);
+  font-weight: bold;
+  padding: 5px;
+}
+
+.todo-item p{
+  margin: 0;
+  font-size: 15px;
+  color: rgb(43, 247, 87);
+  padding: 5px;
+}
+
+.delete-icon,
+.check-icon{
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 10px;
+  color: rgb(115, 119, 116);
+  font-size: 30px;
+}
+
+.check-icon{
+  color: rgb(43, 247, 87);
+}
+
+.delete-icon:hover,
+.check-icon:hover{
+  color: rgb(243, 65, 59);
+}
+
+.todo-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #414040;
 }
